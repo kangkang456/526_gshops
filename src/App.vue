@@ -1,19 +1,32 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
     <router-view/>
+    <FooterGuide v-show="$route.meta.showFooter"/>
   </div>
 </template>
+<script>
+import { mapActions } from 'vuex'
+import FooterGuide from '@/components/FooterGuide/FooterGuide'
+export default {
+  name: 'App',
+  mounted () {
+    // this.$store.dispatch('getAddress')
+    this.getAddress()
+  },
+  methods: {
+    ...mapActions(['getAddress'])
+  },
+  components: {
+    FooterGuide
+  }
+}
+</script>
 
 <style lang="stylus">
 #app
-  font-family Avenir, Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+  position: relative;
+
 </style>
